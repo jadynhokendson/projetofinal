@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', AdminController.login)
+
 router.post('/cadastro', ChaveController.register)
 
 

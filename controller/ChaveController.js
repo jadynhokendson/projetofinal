@@ -8,6 +8,20 @@ module.exports = {
         const chaves = await Chave.findAll();
         res.json(chaves)
     },
+    async atualizar(req, res) {
+        try {
+            const { status, id_chave } = req.body
+            const chaveAtualizada = await Chave.findByPk({ id_chave })
+            await chaveAtualizada.update({ status })
+            res.status(201).json({ chave: chaveAtualizada, created: true });
+            console.log('problema')
+
+        } catch (error) {
+            console.log('Problema no controller')
+            res.status(400).json(error)
+        }
+
+    },
 
     async register(req, res) {
 
@@ -22,19 +36,8 @@ module.exports = {
             res.status(400).json(error)
         }
 
-    },
-
-    async atualizar(req, res) {
-        try {
-            const { status, idStatus } = req.body
-            const chaveAtualizada = await Chave.findByPk({ idStatus })
-            await chaveAtualizada.update({ status })
-            res.status(201).json({ chave: chaveAtualizada, created: true });
-
-        } catch (error) {
-            res.status(400).json(error)
-        }
-
     }
+
+
 
 }

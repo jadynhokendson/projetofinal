@@ -6,35 +6,26 @@
     <link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fontawesome-free-5.15.1-web/css/all.min.css">
     <title>Chaves</title>
-
-
 </head>
 
 <body>
-
     <div class="container">
-
         <div>
-
             <header class="d-flex flex-wrap justify-content-center py-3 ">
                 <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <img src="key.png" alt="" width="40" height="32">
                     <span class="fs-4">Sistema de Chaves</span>
                 </a>
-
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Jadson Kendson</a></li>
                 </ul>
-
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 border-bottom">
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-
                         <button type="button" id="btnCadastrarChave" class="btn btn-warning "> <i class="fas fa-plus"></i> <i class="fas fa-key"> </i> CADASTRAR CHAVE</button>
-
                     </li>
                 </ul>
             </div>
@@ -42,17 +33,15 @@
         <!-- ===== LISTAGEM DE CHAVES ===== -->
 
         <main>
-            <div id="listagem" class="d-flex flex-wrap">
-
-            </div>
+            <div id="listagem" class="d-flex flex-wrap"></div>
 
         </main>
     </div>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        //    $(document).ready(function() {
-        //         console.log('iniciando');
-        listarChaves()
+        listarChaves();
 
         function listarChaves() {
 
@@ -75,7 +64,7 @@
                         html += '<ul class="list-unstyled mt-3 mb-4">'
                         html += '<li><h3>' + item.sala + '</h3> Chave livre para emprestimo</li>'
                         html += '</ul>'
-                        html += '<button type="button" class="w-100 btn btn-lg btn-success " onclick="emprestar(' + item.id + ')">Emprestar</button>'
+                        html += '<button type="button" class="w-100 btn btn-lg btn-success" onclick="emprestar(' + item.id + ')">Emprestar</button>'
                         html += '</div>'
                         html += '</div></div></div>'
                             // html +=
@@ -91,7 +80,7 @@
                         html += '<ul class="list-unstyled mt-3 mb-4">'
                         html += '<li><h3>' + item.sala + '</h3> Chave emprestada.</li>'
                         html += '</ul>'
-                        html += '<button type="button" class="w-100 btn btn-lg btn-danger" onclick="devolver(' + item.id + ')">Devolver</button>'
+                        html += '<button type="button" class="w-100 btn btn-lg btn-danger" ' + item.id + ' onclick="devolver(' + item.id + ')">Devolver</button>'
                         html += '</div></div></div></div>'
                     }
                 }
@@ -99,35 +88,47 @@
 
             }).fail(function(data) {
                 alert(Error)
-
             })
-
-
         }
+
 
         function emprestar(data) {
             console.log(data)
             for (var i = 0; i < data.length; i++) {
-                console.log(i);
                 if ($(this).attr('id') == data[i].id) {
                     console.log($(this).attr('id'))
 
-
                     var chaves = data[i].status
-
+                    console.log(chaves)
                 }
             }
 
+
+            // $.ajax({
+            //     url: 'api/chaves',
+            //     type: 'put',
+            //     data: JSON.stringify({ disponivel: false, id_chave: data}),
+            //     contentType: 'application/json'
+            // }).done(function (data2) {
+            //     console.log(data2);
+            //     listarChaves()
+
+            // }).fail(function (erro) {
+            //     console.log('erro na atualização do status (put do ajax) para false');
+            // })
+
+
+
             $.ajax({
                 url: 'api/cadastro',
-                type: 'PUT',
+                type: 'put',
                 data: JSON.stringify({
                     status: false,
                     idStatus: data
                 }),
                 contentType: 'application/json'
 
-            }).done(function() {
+            }).done(function(data) {
                 console.log('entrou')
                 listarChaves()
             }).fail(function(error) {
@@ -141,9 +142,11 @@
             for (var i = 0; i < data.length; i++) {
                 if ($(this).attr('id') == data[i].id) {
                     console.log($(this).attr('id'))
+                    console.log('teste')
 
                     var chaves = data[i].status
                     console.log(chaves);
+                    console.log('teste 2')
 
                 }
             }
