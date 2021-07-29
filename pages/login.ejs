@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Chaves</title>
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text-center">
+
+    <main class="form-signin">
+        <form id="formLogin">
+            <img class="mb-4" src="key.png" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Faça login para continuar</h1>
+
+            <div class="form-floating " style="margin: auto;">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Usuario</label>
+            </div>
+            <div class="form-floating mt-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Senha</label>
+            </div>
+
+            <div class="checkbox mb-3 " style="margin:auto;">
+                <label>
+                    <input type="checkbox" value="remember-me"> Lembrar-me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary col-6" type="submit">Entrar</button>
+            <p class="mt-5 mb-3 text-muted">&copy; Gerencia de chaves</p>
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#formLogin').submit(function(event) {
+            event.preventDefault()
+
+            var user = {
+                usuario: $('#floatingInput').val(),
+                senha: $('#floatingPassword').val()
+            }
+            var bodyRec = JSON.stringify(user)
+            $.ajax({
+                type: 'POST',
+                url: '/api/login',
+                data: bodyRec,
+                contentType: 'application/json',
+                beforeSend: function(data) {
+                    console.log('tentando')
+                }
+            }).done(function(data) {
+                window.location = '/home'
+                console.log('teste')
+            })
+        })
+    </script>
+
+</body>
+
+</html>

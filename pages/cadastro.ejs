@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar chave</title>
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text-center" style="padding-top: 3px;">
+
+    <main class="form-signin">
+
+        <form id="formCadastro">
+            <img class="mb-4" src="key.png" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">CADASTRAR CHAVE</h1>
+
+            <div class="form-floating" style="margin: auto;">
+                <input type="number" min="0" class="form-control  input-group-prepen" id="numero" placeholder="número da chave">
+                <label for="floatingInput">Número da Chave</label>
+            </div>
+            <div class="form-floating mt-2" style="margin: auto;">
+                <input type="text" class="form-control  input-group-prepen" id="sala" placeholder="111.222.333-44">
+                <label for="floatingPassword">Sala</label>
+            </div>
+
+            <button class="btn btn-lg btn-success mt-2 col-8" style="font-size: 15px; font-weight: bold;" type="submit" id="criar">ADICIONAR CHAVE</button>
+            <hr>
+            <!-- <p class="mt-5 mb-3 text-muted">&copy; Gerencia de chaves</p> -->
+        </form>
+
+        <!-- =====  LISTAGEM DE CHAVES ===== -->
+
+        <!-- <div class="container" id="testamento">
+
+            <nav class="navbar navbar-light bg-light ">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1" style="margin:auto">CHAVES CADASTRADAS</span>
+                </div>
+            </nav>
+            <ul class="list-group list-group">
+
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+
+                        <div class="fw-bold">SALA</div>
+                        LABORATÓRIO 01
+                    </div>
+                    <span class="badge bg-primary rounded-pill">CHAVE +15+</span>
+                </li>
+
+            </ul>
+
+
+        </div> -->
+
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#criar').click(function(event) {
+            event.preventDefault()
+            var chave = {
+                numero_chave: $('#numero').val(),
+                sala: $('#sala').val(),
+                status: true
+            }
+            var bodyRec = JSON.stringify(chave)
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/cadastro',
+                data: bodyRec,
+                contentType: 'application/json',
+                beforeSend: function(data) {
+                    console.log('tentando')
+                }
+
+            }).done(function(data) {
+                console.log(data)
+                alert('CHAVE CRIADA!')
+                window.location = '/home'
+                    // console.log('teste')
+            }).fail(function(data) {
+
+                alert('erro')
+            })
+        })
+
+
+
+        // ===== listagem de chaves  =====
+
+        // $(document).ready(function(event) {
+        //     // event.preventDefault()
+
+
+        //     var chaveAdd = {
+        //         numero_chave: $('#numero').val(),
+        //         sala: $('#sala').val(),
+        //         status: true
+
+        //     }
+
+
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '/api/cadastro',
+
+        //     }).done(function(data) {
+        //         let html = ''
+
+        //         html += ' <nav class="navbar navbar-light bg-light">'
+        //         html += '<div class="container-fluid">'
+        //         html += '<span class="navbar-brand mb-0 h1" style="margin:auto">CHAVES CADASTRADAS</span>'
+        //         html += '</div>'
+        //         html += '</nav>'
+        //         html += '<ul class="list-group list-group">'
+        //         html += ' <li class="list-group-item d-flex justify-content-between align-items-start">'
+        //         html += '<div class="ms-2 me-auto">'
+        //         html += ' <div class="fw-bold">SALA</div>' + sala + ''
+        //         html += ' </div>'
+        //         html += ' <span class="badge bg-primary rounded-pill">CHAVE' + numero_chave + '</span>'
+        //         html += ' </li>'
+        //         html += ' </ul>'
+
+        //     }).fail(function(data) {
+        //         alert(Error)
+
+        //     })
+
+        // })
+
+        // ================ ACIMA REUTILIZAR ================
+
+        // var chavesCadastradas = {
+        //     numero_chave: $('#numero').val(),
+        //     sala: $('#sala').val(),
+        //     status: true
+        // }
+
+
+        // $.ajax({
+        // type: 'GET',
+        // url: '/api/cadastro',
+        // data: bodyRec,
+        // contentType: 'application/json',
+        // beforeSend: function(data) {
+        //     console.log('tentando')
+        // }
+
+        // }).done(function(data) {
+        // console.log(data)
+        // alert('CHAVE CRIADA!')
+        // window.location = '/home'
+        //     // console.log('teste')
+        // }).fail(function(data) {
+
+        // alert('erro')
+        // })
+        // })
+    </script>
+
+</body>
+
+</html>
