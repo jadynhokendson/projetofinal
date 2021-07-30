@@ -10,14 +10,12 @@ router.get('/', (req, res) => {
 })
 
 router.post('/login', AdminController.login)
+router.post('/cadastrarchaves', ChaveController.register)
 
-router.post('/cadastro', ChaveController.register)
+router.get('/listarchaves', ChaveController.getAll)
 
+router.put('/atualizarchaves', ChaveController.atualizar)
 
-router.get('/cadastro', ChaveController.getAll)
-
-
-router.put('/cadastro', ChaveController.atualizar)
 
 
 module.exports = router;

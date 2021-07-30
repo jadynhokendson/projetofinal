@@ -47,7 +47,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: 'api/cadastro'
+                url: '/api/listarchaves'
             }).done(function(data) {
                 let html = '';
                 console.log(data);
@@ -92,39 +92,14 @@
         }
 
 
-        function emprestar(data) {
-            console.log(data)
-            for (var i = 0; i < data.length; i++) {
-                if ($(this).attr('id') == data[i].id) {
-                    console.log($(this).attr('id'))
-
-                    var chaves = data[i].status
-                    console.log(chaves)
-                }
-            }
-
-
-            // $.ajax({
-            //     url: 'api/chaves',
-            //     type: 'put',
-            //     data: JSON.stringify({ disponivel: false, id_chave: data}),
-            //     contentType: 'application/json'
-            // }).done(function (data2) {
-            //     console.log(data2);
-            //     listarChaves()
-
-            // }).fail(function (erro) {
-            //     console.log('erro na atualização do status (put do ajax) para false');
-            // })
-
-
+        function emprestar(id) {
 
             $.ajax({
-                url: 'api/cadastro',
+                url: 'api/atualizarchaves',
                 type: 'put',
                 data: JSON.stringify({
                     status: false,
-                    idStatus: data
+                    idChave: id
                 }),
                 contentType: 'application/json'
 
@@ -137,26 +112,15 @@
             })
         }
 
-        function devolver(data) {
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                if ($(this).attr('id') == data[i].id) {
-                    console.log($(this).attr('id'))
-                    console.log('teste')
+        function devolver(id) {
 
-                    var chaves = data[i].status
-                    console.log(chaves);
-                    console.log('teste 2')
-
-                }
-            }
 
             $.ajax({
-                url: 'api/cadastro',
+                url: 'api/atualizarchaves',
                 type: 'PUT',
                 data: JSON.stringify({
                     status: true,
-                    idStatus: data
+                    idChave: id
                 }),
                 contentType: 'application/json'
 

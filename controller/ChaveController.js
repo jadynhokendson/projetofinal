@@ -10,8 +10,8 @@ module.exports = {
     },
     async atualizar(req, res) {
         try {
-            const { status, id_chave } = req.body
-            const chaveAtualizada = await Chave.findByPk({ id_chave })
+            const { status, idChave } = req.body
+            const chaveAtualizada = await Chave.findByPk(idChave)
             await chaveAtualizada.update({ status })
             res.status(201).json({ chave: chaveAtualizada, created: true });
             console.log('problema')
